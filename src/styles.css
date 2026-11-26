@@ -30,8 +30,8 @@ main{max-width:1120px;margin:0 auto;padding:0 16px 120px}
 .carte .t{flex:1;min-width:0}
 .carte .t b{display:block;font-weight:700}
 .carte .t small{display:block;color:var(--texte-2);font-size:.85rem}
-.carte .ar{font-family:"Amiri Quran",serif;font-size:1.5rem;line-height:1.7;color:var(--texte);text-align:end;display:flex;flex-direction:column;align-items:flex-end}
-.carte .ar small{display:block;margin-top:4px;font-family:system-ui,sans-serif;font-size:.78rem;line-height:1.2;color:var(--texte-2)}
+.carte .ar{font-family:"Amiri Quran",serif;font-size:1.5rem;line-height:1.9;color:var(--texte);text-align:end;display:flex;flex-direction:column;align-items:flex-end}
+.carte .ar small{display:block;margin-top:8px;font-family:system-ui,sans-serif;font-size:.78rem;line-height:1.2;color:var(--texte-2)}
 .vide{text-align:center;color:var(--texte-2);padding:24px}
 .tete{margin:28px 0 8px;padding:28px 20px;text-align:center;border-radius:24px;color:#fff;background:radial-gradient(120% 140% at 50% 0%,#1d4673 0%,#0f2b4c 55%,#0b1f38 100%);box-shadow:0 12px 32px rgba(15,43,76,.25);position:relative;overflow:hidden}
 .tete::after{content:"";position:absolute;inset:auto -10% -60% -10%;height:80%;background:radial-gradient(closest-side,rgba(226,169,59,.25),transparent)}
