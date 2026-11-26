@@ -9,7 +9,7 @@ import { chromium } from "playwright";
 const BASE = process.env.ISSRA_URL || "http://localhost:4391";
 const autorises = readFileSync("tests/domaines-autorises.txt", "utf8").split("\n").map((l) => l.trim()).filter((l) => l && !l.startsWith("#"));
 const hoteAutorise = (h) => h === new URL(BASE).hostname || autorises.some((d) => h === d || h.endsWith("." + d));
-const MODELES = ["/issra/", "/issra/fr/coran/", "/issra/en/quran/", "/issra/fr/coran/18-al-kahf/", "/issra/en/quran/2-al-baqara/"];
+const MODELES = ["/issra/fr/coran/", "/issra/en/quran/", "/issra/fr/coran/18-al-kahf/", "/issra/en/quran/2-al-baqara/"];
 
 test("reseau, cookies, poids JS", async () => {
   const b = await chromium.launch();
@@ -33,13 +33,14 @@ test("reseau, cookies, poids JS", async () => {
   } finally { await b.close(); }
 });
 
-test("hors ligne : Al-Kahf rechargee sans reseau reste lisible", async () => {
+test("hors ligne : Al-Kahf rechargee sans reseau reste lisible (service worker actif sous la CSP servie)", { timeout: 30000 }, async () => {
   const b = await chromium.launch();
   try {
     const c = await b.newContext();
     const page = await c.newPage();
     await page.goto(BASE + "/issra/fr/coran/18-al-kahf/", { waitUntil: "networkidle" });
-    await page.evaluate(async () => { await navigator.serviceWorker.ready; });
+    const pret = await page.evaluate(() => Promise.race([navigator.serviceWorker.ready.then(() => true), new Promise((r) => setTimeout(() => r(false), 8000))]));
+    assert.ok(pret, "service worker non actif (CSP worker-src ?)");
     await page.waitForFunction(async () => !!(await caches.match("/issra/fr/coran/18-al-kahf/")));
     await c.setOffline(true);
     await page.reload({ waitUntil: "domcontentloaded" });
@@ -57,5 +58,30 @@ test("basmala affichee a part (sauf 1 et 9), sans perte de texte", async () => {
       await page.goto(BASE + p);
       assert.equal(await page.locator(".basmala").count(), attendu, p);
     }
+  } finally { await b.close(); }
+});
+
+test("recherche de l index : saisies courantes", async () => {
+  const b = await chromium.launch();
+  try {
+    const page = await b.newPage();
+    await page.goto(BASE + "/issra/fr/coran/");
+    for (const [q, n] of [["al kahf", 18], ["Al-Kahf", 18], ["ya sin", 36], ["yasin", 36], ["caverne", 18], ["الكهف", 18], ["18", 18]]) {
+      await page.fill("#q", q);
+      const vis = await page.locator("#liste li:not([hidden]) .num span").allTextContents();
+      assert.ok(vis.includes(String(n)), `« ${q} » ne trouve pas la sourate ${n} (${vis.slice(0, 5)})`);
+    }
+    await page.fill("#q", "zzzz");
+    assert.ok(await page.locator("#vide").isVisible());
+  } finally { await b.close(); }
+});
+
+test("ancre de verset visible sous l en-tete collant", async () => {
+  const b = await chromium.launch();
+  try {
+    const page = await b.newPage({ viewport: { width: 390, height: 844 } });
+    await page.goto(BASE + "/issra/fr/coran/18-al-kahf/#v10");
+    const [haut, entete] = await page.evaluate(() => [document.getElementById("v10").getBoundingClientRect().top, document.querySelector(".entete").getBoundingClientRect().bottom]);
+    assert.ok(haut >= entete, `verset a ${haut} px, en-tete jusqu a ${entete} px`);
   } finally { await b.close(); }
 });

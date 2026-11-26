@@ -4,3 +4,6 @@ data/coran/
 *.tar.gz
 *.tar.gz.sha256
 .astro/
+# Traductions sans licence commerciale prouvee : hors depot (D202611261641241306-issra-web)
+data/source/french_rashid.csv
+data/source/english_saheeh.csv

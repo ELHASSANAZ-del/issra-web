@@ -4,7 +4,7 @@ import { T, chemin } from "../i18n.mjs";
 import { INDEX } from "../donnees.mjs";
 const { lang } = Astro.props;
 const t = T[lang];
-const alternates = [{ lang: "fr", href: chemin("fr") }, { lang: "en", href: chemin("en") }, { lang: "x-default", href: "/issra/" }];
+const alternates = [{ lang: "fr", href: chemin("fr") }, { lang: "en", href: chemin("en") }, { lang: "x-default", href: chemin("en") }];
 const ld = [{ "@context": "https://schema.org", "@type": "CollectionPage", name: t.h1Index, description: t.descIndex, inLanguage: lang, isPartOf: { "@type": "WebSite", name: "ISSRA", url: "https://ihyinspiration.net/issra/" },
   mainEntity: { "@type": "ItemList", numberOfItems: 114, itemListElement: INDEX.map((s) => ({ "@type": "ListItem", position: s.n, url: new URL(chemin(lang, s.n, s.slug), "https://ihyinspiration.net").href, name: `${t.sourate} ${s.latin}` })) } }];
 ---
@@ -28,7 +28,7 @@ const ld = [{ "@context": "https://schema.org", "@type": "CollectionPage", name:
   <p class="vide" id="vide" hidden role="status">{t.aucune}</p>
   <script is:inline>
   (function(){var q=document.getElementById("q"),li=document.querySelectorAll("#liste li"),v=document.getElementById("vide");
-  function n(x){return x.normalize("NFD").replace(/[̀-ͯ'’-]/g,"").replace(/\s+/g," ")}
+  function n(x){return x.normalize("NFD").replace(/[\u0300-\u036f'\u2019\s-]/g,"").replace(/ee/g,"i").replace(/oo/g,"u").replace(/aa/g,"a")}
   q.addEventListener("input",function(){var s=n(q.value.trim().toLowerCase()),k=0;li.forEach(function(e){var o=!s||n(e.dataset.k).indexOf(s)>=0;e.hidden=!o;if(o)k++});v.hidden=k>0})})();
   </script>
 </Base>

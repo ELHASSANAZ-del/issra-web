@@ -21,7 +21,7 @@ const canon = new URL(Astro.url.pathname, Astro.site).href;
 <link rel="apple-touch-icon" href="/issra/apple-touch-icon.png">
 <link rel="preload" href="/issra/AmiriQuran.woff2" as="font" type="font/woff2" crossorigin>
 <meta property="og:type" content="website"><meta property="og:title" content={titre}><meta property="og:description" content={description}><meta property="og:url" content={canon}><meta property="og:image" content="https://ihyinspiration.net/issra/icone-512.png"><meta property="og:locale" content={lang === "fr" ? "fr_FR" : "en_US"}>
-{jsonld.map((j) => <script type="application/ld+json" set:html={JSON.stringify(j)} />)}
+{jsonld.map((j) => <script type="application/ld+json" set:html={JSON.stringify(j).replace(/</g, "\\u003c")} />)}
 </head>
 <body>
 <a class="saut" href="#contenu">{t.aller}</a>

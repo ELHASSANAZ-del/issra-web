@@ -1,16 +1,16 @@
 /* ISSRA web : palette de l icone (D20261126023525707) : nuit = marque/boutons, or = accents, sarcelle = liens/actifs, ivoire = fonds, rouge = erreurs seulement. */
 @font-face{font-family:"Amiri Quran";src:url("/issra/AmiriQuran.woff2") format("woff2");font-display:swap;unicode-range:U+0600-06FF,U+0750-077F,U+08A0-08FF,U+FB50-FDFF,U+FE70-FEFF,U+0020,U+00A0}
-:root{--nuit:#0f2b4c;--nuit-2:#173d66;--or:#e2a93b;--or-doux:#f6e3b4;--sarcelle:#0a7369;--ivoire:#fbf7ee;--carte:#ffffff;--texte:#14202e;--texte-2:#4a5868;--trait:#e6dfcf;--rouge:#b3261e;--ombre:0 1px 2px rgba(15,43,76,.06),0 8px 24px rgba(15,43,76,.08);--r:16px;color-scheme:light dark}
-@media (prefers-color-scheme:dark){:root{--ivoire:#0b1626;--carte:#12223a;--texte:#eef2f7;--texte-2:#a9b6c6;--trait:#22354f;--sarcelle:#4fd1c1;--nuit-2:#1d4673;--ombre:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.35)}}
+:root{--nuit:#0f2b4c;--nuit-2:#173d66;--or:#e2a93b;--or-doux:#f6e3b4;--sarcelle:#0a7369;--ivoire:#fbf7ee;--carte:#ffffff;--texte:#14202e;--texte-2:#4a5868;--trait:#e6dfcf;--rouge:#b3261e;--focus:#0f2b4c;--ombre:0 1px 2px rgba(15,43,76,.06),0 8px 24px rgba(15,43,76,.08);--r:16px;color-scheme:light dark}
+@media (prefers-color-scheme:dark){:root{--ivoire:#0b1626;--carte:#12223a;--texte:#eef2f7;--texte-2:#a9b6c6;--trait:#22354f;--sarcelle:#4fd1c1;--focus:#e2a93b;--nuit-2:#1d4673;--ombre:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.35)}}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 body{margin:0;background:var(--ivoire);color:var(--texte);font:400 1rem/1.6 system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",sans-serif}
 a{color:var(--sarcelle)}
-a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid var(--or);outline-offset:2px;border-radius:8px}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:8px}
 .saut{position:absolute;left:-9999px}.saut:focus{left:12px;top:12px;z-index:9;background:var(--carte);padding:8px 12px;border-radius:8px}
 .entete{position:sticky;top:0;z-index:5;background:linear-gradient(180deg,#0f2b4c,#132f52);color:#fff;box-shadow:0 2px 12px rgba(0,0,0,.18)}
 .entete .l{max-width:1120px;margin:0 auto;display:flex;align-items:center;gap:12px;padding:10px 16px;min-height:60px}
-.marque{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;font-weight:800;letter-spacing:.08em}
+.marque{display:flex;align-items:center;gap:10px;min-height:44px;color:#fff;text-decoration:none;font-weight:800;letter-spacing:.08em}
 .marque img{border-radius:10px;box-shadow:0 0 0 1px rgba(255,255,255,.15)}
 .entete nav{margin-inline-start:auto;display:flex;gap:4px;align-items:center}
 .entete nav a{color:#fff;text-decoration:none;padding:10px 12px;border-radius:10px;font-weight:600;min-height:44px;display:inline-flex;align-items:center}
@@ -31,7 +31,7 @@ main{max-width:1120px;margin:0 auto;padding:0 16px 120px}
 .carte .t b{display:block;font-weight:700}
 .carte .t small{display:block;color:var(--texte-2);font-size:.85rem}
 .carte .ar{font-family:"Amiri Quran",serif;font-size:1.5rem;line-height:1.7;color:var(--texte);text-align:end;display:flex;flex-direction:column;align-items:flex-end}
-.carte .ar small{display:block;font-family:system-ui,sans-serif;font-size:.78rem;line-height:1.2;color:var(--texte-2)}
+.carte .ar small{display:block;margin-top:4px;font-family:system-ui,sans-serif;font-size:.78rem;line-height:1.2;color:var(--texte-2)}
 .vide{text-align:center;color:var(--texte-2);padding:24px}
 .tete{margin:28px 0 8px;padding:28px 20px;text-align:center;border-radius:24px;color:#fff;background:radial-gradient(120% 140% at 50% 0%,#1d4673 0%,#0f2b4c 55%,#0b1f38 100%);box-shadow:0 12px 32px rgba(15,43,76,.25);position:relative;overflow:hidden}
 .tete::after{content:"";position:absolute;inset:auto -10% -60% -10%;height:80%;background:radial-gradient(closest-side,rgba(226,169,59,.25),transparent)}
@@ -46,11 +46,12 @@ main{max-width:1120px;margin:0 auto;padding:0 16px 120px}
 .bascule{display:inline-flex;background:var(--carte);border:1px solid var(--trait);border-radius:999px;padding:4px;box-shadow:var(--ombre)}
 .bascule button{font:inherit;font-weight:600;border:0;background:none;color:var(--texte-2);min-height:44px;padding:0 18px;border-radius:999px;cursor:pointer}
 .bascule button[aria-pressed=true]{background:var(--nuit);color:#fff}
+@media (prefers-color-scheme:dark){.bascule button[aria-pressed=true]{background:var(--or);color:#0f2b4c}}
 .basmala{font-family:"Amiri Quran",serif;font-size:2rem;text-align:center;margin:8px 0 16px;color:var(--texte)}
 .versets{list-style:none;padding:0;margin:0}
-.v{padding:20px 4px;border-bottom:1px solid var(--trait);display:grid;grid-template-columns:auto 1fr;gap:4px 16px}
+.v{scroll-margin-top:84px;padding:20px 4px;border-bottom:1px solid var(--trait);display:grid;grid-template-columns:auto 1fr;gap:4px 16px}
 .v .ref{grid-row:span 3;display:flex;flex-direction:column;align-items:center;gap:6px}
-.v .ref a{font-size:.85rem;font-weight:700;color:var(--sarcelle);text-decoration:none;min-height:44px;display:grid;place-items:center}
+.v .ref a{font-size:.85rem;font-weight:700;color:var(--sarcelle);text-decoration:none;min-height:44px;min-width:44px;display:grid;place-items:center}
 .v .ref button{font:inherit;font-size:.8rem;border:1px solid var(--trait);background:var(--carte);color:var(--texte-2);border-radius:10px;min-height:44px;min-width:44px;padding:0 8px;cursor:pointer}
 .v .ar{font-family:"Amiri Quran",serif;font-size:clamp(1.65rem,4.4vw,2.1rem);line-height:2.25;text-align:right;direction:rtl;margin:0}
 .v .tr{margin:8px 0 0;color:var(--texte);font-size:1.02rem}

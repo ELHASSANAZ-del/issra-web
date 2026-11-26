@@ -70,8 +70,8 @@ export function generer() {
   const actives = traductionsActives();
   const { versets, notice } = lireTanzil(lire("quran-uthmani.txt"));
   const meta = lireMeta(lire("quran-data.js"));
-  const fr = lireTraduction("french_rashid.csv");
-  const en = lireTraduction("english_saheeh.csv");
+  const fr = actives.includes("fr") ? lireTraduction("french_rashid.csv") : null;
+  const en = actives.includes("en") ? lireTraduction("english_saheeh.csv") : null;
   if (versets.length !== 6236 || meta.sourates.length !== 114 || NOMS_FR.length !== 114) throw new Error("comptes inattendus");
   mkdirSync(join(RACINE, "data", "coran"), { recursive: true });
   const index = [];
@@ -88,7 +88,7 @@ export function generer() {
       notice_tanzil: notice,
       liste: vs.map((v) => {
         const k = `${s}:${v.a}`;
-        if (!fr.parCle.has(k) || !en.parCle.has(k)) throw new Error(`traduction manquante ${k}`);
+        if ((fr && !fr.parCle.has(k)) || (en && !en.parCle.has(k))) throw new Error(`traduction manquante ${k}`);
         const tr = {};
         if (actives.includes("fr")) Object.assign(tr, { fr: fr.parCle.get(k).t, frN: fr.parCle.get(k).n });
         if (actives.includes("en")) Object.assign(tr, { en: en.parCle.get(k).t, enN: en.parCle.get(k).n });

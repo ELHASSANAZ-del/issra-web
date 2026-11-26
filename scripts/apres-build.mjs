@@ -19,6 +19,13 @@ for (const [l, nom, seg, desc] of [["fr", "ISSRA – Le Coran", "coran", "Lire l
   }, null, 1) + "\n");
 }
 
+// Version du cache du service worker = empreinte des fichiers statiques servis (rafraichit polices et icones).
+{
+  const h = createHash("sha256");
+  for (const f of readdirSync(join(RACINE, "public")).sort()) if (f !== "sw.js") h.update(f).update(readFileSync(join(RACINE, "public", f)));
+  const sw = join(SITE, "sw.js");
+  writeFileSync(sw, readFileSync(sw, "utf8").replace("__VERSION__", h.digest("hex").slice(0, 12)));
+}
 const fichiers = [];
 (function parcourir(d) { for (const f of readdirSync(d).sort()) { const p = join(d, f); statSync(p).isDirectory() ? parcourir(p) : fichiers.push(p); } })(SITE);
 const pages = fichiers.filter((f) => f.endsWith("index.html"));
@@ -52,9 +59,8 @@ for (const [u, alt] of hreflangs) for (const [l, cible] of Object.entries(alt)) 
 
 const apercu = readFileSync(join(RACINE, "data", "coran", "001.json"), "utf8").includes('"apercu":true');
 writeFileSync(join(SITE, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${[...existe].sort().map((u) => `<url><loc>${u}</loc></url>`).join("\n")}\n</urlset>\n`);
-writeFileSync(join(SITE, "robots-issra.txt"), `Sitemap: ${BASE}/issra/sitemap.xml\n`);
 
-if (pages.length !== 2 * 115 + 1) erreurs.push(`nombre de pages ${pages.length}, attendu 231`);
+if (pages.length !== 2 * 115) erreurs.push(`nombre de pages ${pages.length}, attendu 230`);
 if (erreurs.length) { console.error(erreurs.slice(0, 40).join("\n")); console.error(`ECHEC : ${erreurs.length} defaut(s)`); process.exit(1); }
 console.log(`check ok : ${pages.length} pages, ${fichiers.length + 3} fichiers, liens et hreflang coherents`);
 
