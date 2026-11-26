@@ -5,7 +5,7 @@ import { INDEX } from "../donnees.mjs";
 const { lang } = Astro.props;
 const t = T[lang];
 const alternates = [{ lang: "fr", href: chemin("fr") }, { lang: "en", href: chemin("en") }, { lang: "x-default", href: chemin("en") }];
-const ld = [{ "@context": "https://schema.org", "@type": "CollectionPage", name: t.h1Index, description: t.descIndex, inLanguage: lang, isPartOf: { "@type": "WebSite", name: "ISSRA", url: "https://ihyinspiration.net/issra/" },
+const ld = [{ "@context": "https://schema.org", "@type": "CollectionPage", name: t.h1Index, description: t.descIndex, inLanguage: lang, isPartOf: { "@type": "WebSite", name: "ISSRA", url: new URL(chemin(lang), "https://ihyinspiration.net").href },
   mainEntity: { "@type": "ItemList", numberOfItems: 114, itemListElement: INDEX.map((s) => ({ "@type": "ListItem", position: s.n, url: new URL(chemin(lang, s.n, s.slug), "https://ihyinspiration.net").href, name: `${t.sourate} ${s.latin}` })) } }];
 ---
 <Base lang={lang} titre={t.titreIndex} description={t.descIndex} alternates={alternates} jsonld={ld}>

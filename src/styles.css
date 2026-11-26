@@ -14,6 +14,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,su
 .marque img{border-radius:10px;box-shadow:0 0 0 1px rgba(255,255,255,.15)}
 .entete nav{margin-inline-start:auto;display:flex;gap:4px;align-items:center}
 .entete nav a{color:#fff;text-decoration:none;padding:10px 12px;border-radius:10px;font-weight:600;min-height:44px;display:inline-flex;align-items:center}
+.entete a:focus-visible{outline-color:var(--or)}
 .entete nav a[aria-current]{background:rgba(255,255,255,.12)}
 .entete nav a:hover{background:rgba(255,255,255,.08)}
 main{max-width:1120px;margin:0 auto;padding:0 16px 120px}
@@ -49,7 +50,7 @@ main{max-width:1120px;margin:0 auto;padding:0 16px 120px}
 @media (prefers-color-scheme:dark){.bascule button[aria-pressed=true]{background:var(--or);color:#0f2b4c}}
 .basmala{font-family:"Amiri Quran",serif;font-size:2rem;text-align:center;margin:8px 0 16px;color:var(--texte)}
 .versets{list-style:none;padding:0;margin:0}
-.v{scroll-margin-top:84px;padding:20px 4px;border-bottom:1px solid var(--trait);display:grid;grid-template-columns:auto 1fr;gap:4px 16px}
+.v{scroll-margin-top:84px;content-visibility:auto;contain-intrinsic-size:auto 220px;padding:20px 4px;border-bottom:1px solid var(--trait);display:grid;grid-template-columns:auto 1fr;gap:4px 16px}
 .v .ref{grid-row:span 3;display:flex;flex-direction:column;align-items:center;gap:6px}
 .v .ref a{font-size:.85rem;font-weight:700;color:var(--sarcelle);text-decoration:none;min-height:44px;min-width:44px;display:grid;place-items:center}
 .v .ref button{font:inherit;font-size:.8rem;border:1px solid var(--trait);background:var(--carte);color:var(--texte-2);border-radius:10px;min-height:44px;min-width:44px;padding:0 8px;cursor:pointer}
@@ -77,6 +78,6 @@ main{max-width:1120px;margin:0 auto;padding:0 16px 120px}
 .pied h2{font-size:1rem;color:var(--texte);margin:0 0 8px}
 .pied p{margin:4px 0}
 .pied nav{display:flex;gap:16px;flex-wrap:wrap;margin-top:12px}
-.pied nav a{min-height:44px;display:inline-flex;align-items:center}
+.pied nav a{min-height:44px;min-width:44px;display:inline-flex;align-items:center}
 @media (max-width:640px){.app p{display:none}.app a.bouton{flex:1;justify-content:center}.entete nav a{padding:10px}.v{grid-template-columns:1fr}.v .ref{grid-row:auto;flex-direction:row;justify-content:space-between}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}

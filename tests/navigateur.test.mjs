@@ -85,3 +85,28 @@ test("ancre de verset visible sous l en-tete collant", async () => {
     assert.ok(haut >= entete, `verset a ${haut} px, en-tete jusqu a ${entete} px`);
   } finally { await b.close(); }
 });
+
+test("anneau de focus contraste (>= 3:1) sur l en-tete et le contenu, clair et sombre", async () => {
+  const b = await chromium.launch();
+  try {
+    for (const scheme of ["light", "dark"]) {
+      const page = await b.newPage({ colorScheme: scheme });
+      await page.goto(BASE + "/issra/fr/coran/18-al-kahf/");
+      for (const sel of [".marque", ".entete nav a", ".navs a", ".bascule button"]) {
+        await page.focus(sel);
+        await page.keyboard.press("Shift+Tab"); await page.keyboard.press("Tab");
+        const r = await page.evaluate((sel) => {
+          const e = document.activeElement; const lum = (c) => { const [r, g, b] = c.match(/\d+/g).map(Number).map((v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; }); return 0.2126 * r + 0.7152 * g + 0.0722 * b; };
+          let f = e.parentElement, bg = "rgba(0, 0, 0, 0)";
+          while (f && (bg = getComputedStyle(f).backgroundColor).endsWith(", 0)")) f = f.parentElement;
+          if (!f || bg.includes("gradient")) bg = getComputedStyle(document.body).backgroundColor;
+          if (getComputedStyle(e.closest(".entete") || document.body).backgroundImage.includes("gradient") && e.closest(".entete")) bg = "rgb(15, 43, 76)";
+          const a = lum(getComputedStyle(e).outlineColor), c = lum(bg);
+          return { sel, style: getComputedStyle(e).outlineStyle, ratio: (Math.max(a, c) + 0.05) / (Math.min(a, c) + 0.05) };
+        }, sel);
+        assert.ok(r.style !== "none" && r.ratio >= 3, `${scheme} ${sel} : anneau ${r.style} ${r.ratio.toFixed(2)}:1`);
+      }
+      await page.close();
+    }
+  } finally { await b.close(); }
+});

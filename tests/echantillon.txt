@@ -1,0 +1,23 @@
+# Echantillon W1a (fiche §3) : 2 index + 10 sourates (courtes, longues, sans basmala, sajda) x 2 langues. Chemins relatifs a l hote.
+/issra/fr/coran/
+/issra/en/quran/
+/issra/fr/coran/1-al-fatiha/
+/issra/en/quran/1-al-fatiha/
+/issra/fr/coran/2-al-baqara/
+/issra/en/quran/2-al-baqara/
+/issra/fr/coran/9-at-tawba/
+/issra/en/quran/9-at-tawba/
+/issra/fr/coran/18-al-kahf/
+/issra/en/quran/18-al-kahf/
+/issra/fr/coran/36-yaseen/
+/issra/en/quran/36-yaseen/
+/issra/fr/coran/55-ar-rahman/
+/issra/en/quran/55-ar-rahman/
+/issra/fr/coran/67-al-mulk/
+/issra/en/quran/67-al-mulk/
+/issra/fr/coran/96-al-alaq/
+/issra/en/quran/96-al-alaq/
+/issra/fr/coran/112-al-ikhlas/
+/issra/en/quran/112-al-ikhlas/
+/issra/fr/coran/114-an-nas/
+/issra/en/quran/114-an-nas/

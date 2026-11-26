@@ -14,7 +14,9 @@ const basmala = n !== 1 && n !== 9 && s.liste[0].ar.startsWith(BASMALA);
 const arVerset = (v) => (basmala && v.a === 1 ? v.ar.slice(BASMALA.length) : v.ar);
 const chiffresAr = (x) => String(x).replace(/\d/g, (d) => "٠١٢٣٤٥٦٧٨٩"[d]);
 const alternates = [{ lang: "fr", href: chemin("fr", n, s.slug) }, { lang: "en", href: chemin("en", n, s.slug) }, { lang: "x-default", href: chemin("en", n, s.slug) }];
-const titre = aTrad ? t.titreSourateTr(s) : t.titreSourate(s);
+const complet = aTrad ? t.titreSourateTr(s) : t.titreSourate(s);
+// Titre <= 65 caracteres (affichage Google) : sans le sens du nom si necessaire.
+const titre = complet.length <= 65 ? complet : `${t.sourate} ${s.latin} (${s.ar}) | ISSRA`;
 const desc = t.descSourate(s);
 const url = new URL(chemin(lang, n, s.slug), "https://ihyinspiration.net").href;
 const ld = [
