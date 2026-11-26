@@ -56,11 +56,11 @@ const ld = [
     </ol>
   </div>
   <nav class="navs" aria-label={t.toutes}>
-    {prec ? <a href={chemin(lang, prec.n, prec.slug)} rel="prev"><span aria-hidden="true">←</span> {t.precedente} : {prec.latin}</a> : <span></span>}
+    {prec ? <a href={chemin(lang, prec.n, prec.slug)} rel="prev"><span aria-hidden="true">←</span> {t.precedente}{t.dp}{prec.latin}</a> : <span></span>}
     <a href={chemin(lang)}>{t.toutes}</a>
-    {suiv ? <a href={chemin(lang, suiv.n, suiv.slug)} rel="next">{t.suivante} : {suiv.latin} <span aria-hidden="true">→</span></a> : <span></span>}
+    {suiv ? <a href={chemin(lang, suiv.n, suiv.slug)} rel="next">{t.suivante}{t.dp}{suiv.latin} <span aria-hidden="true">→</span></a> : <span></span>}
   </nav>
-  <Fragment slot="sources">{s.sources[lang] && <p>{t.traduction} : {s.sources[lang].nom}, version {s.sources[lang].version}. Source : <a href={s.sources[lang].lien} rel="noopener">QuranEnc.com</a>, texte non modifié.</p>}</Fragment>
+  <Fragment slot="sources">{s.sources[lang] && <p>{t.traduction}{t.dp}{s.sources[lang].nom}, version {s.sources[lang].version}. Source{t.dp}<a href={s.sources[lang].lien} rel="noopener">QuranEnc.com</a>{lang === "fr" ? ", texte non modifié." : ", unmodified text."}</p>}</Fragment>
   <script is:inline define:vars={{ copie: t.copie, copier: t.copier, ref: s.latin }}>
   (function(){var tx=document.getElementById("texte"),bs=document.querySelectorAll("[data-mode]");
   function m(x){tx.classList.toggle("lecture",x==="lecture");bs.forEach(function(b){b.setAttribute("aria-pressed",b.dataset.mode===x)});try{localStorage.setItem("issra-mode",x)}catch(e){}}
