@@ -14,7 +14,7 @@ const erreurs = [];
 for (const [l, nom, seg, desc] of [["fr", "ISSRA – Le Coran", "coran", "Lire le Coran, gratuit et sans publicité."], ["en", "ISSRA – The Quran", "quran", "Read the Quran, free and ad-free."]]) {
   writeFileSync(join(SITE, `manifest-${l}.webmanifest`), JSON.stringify({
     name: nom, short_name: "ISSRA", description: desc, lang: l, dir: "ltr", start_url: `/issra/${l}/${seg}/`, scope: "/issra/",
-    display: "standalone", background_color: "#fbf7ee", theme_color: "#0f2b4c",
+    display: "standalone", background_color: "#FBF6EA", theme_color: "#0A1A4A",
     icons: [{ src: "/issra/icone-192.png", sizes: "192x192", type: "image/png" }, { src: "/issra/icone-512.png", sizes: "512x512", type: "image/png", purpose: "any" }],
   }, null, 1) + "\n");
 }

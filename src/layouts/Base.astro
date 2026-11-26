@@ -15,7 +15,7 @@ const canon = new URL(Astro.url.pathname, Astro.site).href;
 <link rel="canonical" href={canon}>
 {alternates.map((a) => <link rel="alternate" hreflang={a.lang} href={new URL(a.href, Astro.site).href}>)}
 {apercu && <meta name="robots" content="noindex">}
-<meta name="theme-color" content="#0f2b4c">
+<meta name="theme-color" content="#0A1A4A">
 <link rel="manifest" href={`/issra/manifest-${lang}.webmanifest`}>
 <link rel="icon" href="/issra/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/issra/apple-touch-icon.png">
