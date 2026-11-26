@@ -1,7 +1,7 @@
 /* ISSRA web : jetons LANTERNE (D2026112606490919271, miroir de ~/Audits/issra-design/jetons/vif.py, 72/72 AA) : bleu nuit = marque/boutons, or = recompenses, sarcelle = bonne reponse/sajda, ivoire = fonds, rouge = erreurs seulement. */
 @font-face{font-family:"Amiri Quran";src:url("/issra/AmiriQuran.woff2") format("woff2");font-display:swap;unicode-range:U+0600-06FF,U+0750-077F,U+08A0-08FF,U+FB50-FDFF,U+FE70-FEFF,U+0020,U+00A0}
-:root{--fond:#FBF6EA;--carte:#FFFDF8;--texte:#0F2340;--texte-2:#4A5B70;--trait:#E6DCC6;--lien:#1E4FA0;--sarcelle:#0B7F72;--action-h:#2A6DEB;--action-b:#1C47B8;--hero-h:#1B3F96;--hero-m:#122C72;--hero-b:#0A1A4A;--or-h:#FFD36E;--or-b:#F2A516;--sur-or:#3A2600;--or-hero:#FFD66E;--rouge:#C0303A;--focus:#1E4FA0;--ombre:0 1px 2px rgba(10,26,74,.06),0 8px 24px rgba(10,26,74,.09);--r:16px;color-scheme:light dark}
-@media (prefers-color-scheme:dark){:root{--fond:#061630;--carte:#12305E;--texte:#F2F6FC;--texte-2:#B5C4DA;--trait:#2F5590;--lien:#8DB9FF;--sarcelle:#3FD9C4;--action-b:#2C62D6;--hero-m:#112A6C;--hero-b:#071440;--rouge:#FF8A80;--focus:#FFC857;--ombre:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.35)}}
+:root{--fond:#FBF6EA;--carte:#FFFDF8;--texte:#0F2340;--texte-2:#4A5B70;--trait:#E6DCC6;--lien:#1E4FA0;--sarcelle:#0B7F72;--action-h:#2A6DEB;--action-b:#1C47B8;--hero-h:#1B3F96;--hero-m:#122C72;--hero-b:#0A1A4A;--or-h:#FFD36E;--or-b:#F2A516;--sur-or:#3A2600;--or-hero:#FFD66E;--focus:#1E4FA0;--ombre:0 1px 2px rgba(10,26,74,.06),0 8px 24px rgba(10,26,74,.09);--r:16px;color-scheme:light dark}
+@media (prefers-color-scheme:dark){:root{--fond:#061630;--carte:#12305E;--texte:#F2F6FC;--texte-2:#B5C4DA;--trait:#2F5590;--lien:#8DB9FF;--sarcelle:#3FD9C4;--action-b:#2C62D6;--hero-m:#112A6C;--hero-b:#071440;--focus:#FFC857;--ombre:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.35)}}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 body{margin:0;background:var(--fond);color:var(--texte);font:400 1rem/1.6 system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",sans-serif}
@@ -22,6 +22,7 @@ main{max-width:1120px;margin:0 auto;padding:0 16px 120px}
 .hero h1{margin:0;font-size:clamp(1.9rem,5vw,2.8rem);line-height:1.15;color:var(--texte)}
 .hero p{margin:8px auto 0;color:var(--texte-2);max-width:52ch}
 .chercher{display:flex;justify-content:center;margin:20px 0 8px}
+.chercher input::placeholder{color:var(--texte-2);opacity:1}
 .chercher input{width:min(560px,100%);min-height:48px;padding:0 16px;font:inherit;border-radius:999px;border:1px solid var(--trait);background:var(--carte);color:var(--texte);box-shadow:var(--ombre)}
 .grille{list-style:none;padding:0;margin:20px 0 0;display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
 .carte{display:flex;align-items:center;gap:14px;padding:14px 16px;background:var(--carte);border:1px solid var(--trait);border-radius:var(--r);text-decoration:none;color:var(--texte);box-shadow:var(--ombre);transition:transform .15s ease,border-color .15s ease;min-height:72px}
@@ -66,7 +67,7 @@ main{max-width:1120px;margin:0 auto;padding:0 16px 120px}
 .sajda{color:var(--sarcelle);font-size:.85rem;font-weight:600}
 .navs{display:flex;justify-content:space-between;gap:12px;margin:28px 0;flex-wrap:wrap}
 .navs a{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 18px;border-radius:999px;border:1px solid var(--trait);background:var(--carte);color:var(--texte);text-decoration:none;font-weight:600;box-shadow:var(--ombre)}
-.app{position:fixed;inset:auto 0 0 0;z-index:6;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:color-mix(in srgb,var(--carte) 92%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--trait)}
+.app{position:fixed;inset:auto 0 0 0;z-index:6;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:var(--carte);border-top:1px solid var(--trait)}
 .app .l{max-width:1120px;margin:0 auto;display:flex;align-items:center;gap:12px}
 .app img{border-radius:10px}
 .app p{margin:0;flex:1;min-width:0;font-size:.88rem;color:var(--texte-2);line-height:1.3}
