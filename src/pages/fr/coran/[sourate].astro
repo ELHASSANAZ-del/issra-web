@@ -1,0 +1,9 @@
+---
+import Sourate from "../../../components/Sourate.astro";
+import { INDEX } from "../../../donnees.mjs";
+export function getStaticPaths() {
+  return INDEX.map((s) => ({ params: { sourate: `${s.n}-${s.slug}` }, props: { n: s.n } }));
+}
+const { n } = Astro.props;
+---
+<Sourate lang="fr" n={n} />

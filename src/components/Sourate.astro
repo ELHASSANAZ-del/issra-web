@@ -1,0 +1,71 @@
+---
+import Base from "../layouts/Base.astro";
+import { T, chemin } from "../i18n.mjs";
+import { sourate, INDEX } from "../donnees.mjs";
+const { lang, n } = Astro.props;
+const t = T[lang];
+const s = sourate(n);
+const prec = INDEX[n - 2], suiv = INDEX[n];
+const nomLocal = lang === "fr" ? s.fr : s.en;
+const aTrad = s.liste[0][lang] !== undefined;
+// Tanzil prefixe la basmala au verset 1 (sauf sourates 1 et 9) : affichage separe, texte source inchange.
+const BASMALA = sourate(1).liste[0].ar + " "; // 1:1 tel que fourni par Tanzil
+const basmala = n !== 1 && n !== 9 && s.liste[0].ar.startsWith(BASMALA);
+const arVerset = (v) => (basmala && v.a === 1 ? v.ar.slice(BASMALA.length) : v.ar);
+const chiffresAr = (x) => String(x).replace(/\d/g, (d) => "٠١٢٣٤٥٦٧٨٩"[d]);
+const alternates = [{ lang: "fr", href: chemin("fr", n, s.slug) }, { lang: "en", href: chemin("en", n, s.slug) }, { lang: "x-default", href: chemin("en", n, s.slug) }];
+const titre = aTrad ? t.titreSourateTr(s) : t.titreSourate(s);
+const desc = t.descSourate(s);
+const url = new URL(chemin(lang, n, s.slug), "https://ihyinspiration.net").href;
+const ld = [
+  { "@context": "https://schema.org", "@type": "Chapter", name: `${t.sourate} ${s.latin}`, alternateName: [s.ar, nomLocal], position: n, url, inLanguage: aTrad ? ["ar", lang] : "ar",
+    isPartOf: { "@type": "Book", name: lang === "fr" ? "Le Coran" : "The Quran", inLanguage: "ar" }, license: "https://creativecommons.org/licenses/by/3.0/", creditText: "Tanzil Project (tanzil.net)" },
+  { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
+    { "@type": "ListItem", position: 1, name: t.coran, item: new URL(chemin(lang), "https://ihyinspiration.net").href },
+    { "@type": "ListItem", position: 2, name: `${t.sourate} ${s.latin}`, item: url } ] },
+];
+---
+<Base lang={lang} titre={titre} description={desc} alternates={alternates} jsonld={ld} apercu={s.apercu}>
+  <section class="tete">
+    <p class="nomar" lang="ar" dir="rtl">{s.ar}</p>
+    <h1>{n}. {t.sourate} {s.latin}</h1>
+    <p>{nomLocal}</p>
+    <div class="pastilles"><span>{t.type[s.type]}</span><span>{t.versets(s.versets)}</span></div>
+  </section>
+  <div class="outils">
+    <div class="bascule" role="group" aria-label={`${t.modeVerset} / ${t.modeLecture}`}>
+      <button type="button" data-mode="verset" aria-pressed="true">{t.modeVerset}</button>
+      <button type="button" data-mode="lecture" aria-pressed="false">{t.modeLecture}</button>
+    </div>
+  </div>
+  <div id="texte">
+    {basmala && <p class="basmala" lang="ar" dir="rtl">{BASMALA.trim()}</p>}
+    <ol class="versets">
+      {s.liste.map((v) => (
+        <li class="v" id={`v${v.a}`}>
+          <div class="ref">
+            <a href={`#v${v.a}`} aria-label={`${t.sourate} ${s.latin}, ${v.a}`}>{n}:{v.a}</a>
+            <button type="button" data-copier={v.a} aria-label={`${t.copier} ${n}:${v.a}`}>{t.copier}</button>
+          </div>
+          <p class="ar" lang="ar" dir="rtl">{arVerset(v)}<span class="fin" aria-hidden="true">﴿{chiffresAr(v.a)}﴾</span></p>
+          {v.sajda && <p class="sajda">۩ {t.sajda}</p>}
+          {aTrad && <p class="tr">{v[lang]}</p>}
+          {aTrad && v[lang + "N"] && <details><summary>{t.notes}</summary><p>{v[lang + "N"]}</p></details>}
+        </li>
+      ))}
+    </ol>
+  </div>
+  <nav class="navs" aria-label={t.toutes}>
+    {prec ? <a href={chemin(lang, prec.n, prec.slug)} rel="prev"><span aria-hidden="true">←</span> {t.precedente} : {prec.latin}</a> : <span></span>}
+    <a href={chemin(lang)}>{t.toutes}</a>
+    {suiv ? <a href={chemin(lang, suiv.n, suiv.slug)} rel="next">{t.suivante} : {suiv.latin} <span aria-hidden="true">→</span></a> : <span></span>}
+  </nav>
+  <Fragment slot="sources">{s.sources[lang] && <p>{t.traduction} : {s.sources[lang].nom}, version {s.sources[lang].version}. Source : <a href={s.sources[lang].lien} rel="noopener">QuranEnc.com</a>, texte non modifié.</p>}</Fragment>
+  <script is:inline define:vars={{ copie: t.copie, copier: t.copier, ref: s.latin }}>
+  (function(){var tx=document.getElementById("texte"),bs=document.querySelectorAll("[data-mode]");
+  function m(x){tx.classList.toggle("lecture",x==="lecture");bs.forEach(function(b){b.setAttribute("aria-pressed",b.dataset.mode===x)});try{localStorage.setItem("issra-mode",x)}catch(e){}}
+  bs.forEach(function(b){b.addEventListener("click",function(){m(b.dataset.mode)})});try{if(localStorage.getItem("issra-mode")==="lecture")m("lecture")}catch(e){}
+  document.addEventListener("click",function(e){var b=e.target.closest("[data-copier]");if(!b||!navigator.clipboard)return;var li=b.closest("li"),a=li.querySelector(".ar").firstChild.textContent,tr=li.querySelector(".tr");
+  navigator.clipboard.writeText(a+(tr?"\n"+tr.textContent:"")+"\n("+ref+" "+b.dataset.copier+")\n"+location.origin+location.pathname+"#v"+b.dataset.copier).then(function(){b.textContent=copie;setTimeout(function(){b.textContent=copier},1500)})})})();
+  </script>
+</Base>

@@ -1,0 +1,79 @@
+/* ISSRA web : palette de l icone (D20261126023525707) : nuit = marque/boutons, or = accents, sarcelle = liens/actifs, ivoire = fonds, rouge = erreurs seulement. */
+@font-face{font-family:"Amiri Quran";src:url("/issra/AmiriQuran.woff2") format("woff2");font-display:swap;unicode-range:U+0600-06FF,U+0750-077F,U+08A0-08FF,U+FB50-FDFF,U+FE70-FEFF,U+0020,U+00A0}
+:root{--nuit:#0f2b4c;--nuit-2:#173d66;--or:#e2a93b;--or-doux:#f6e3b4;--sarcelle:#0a7369;--ivoire:#fbf7ee;--carte:#ffffff;--texte:#14202e;--texte-2:#4a5868;--trait:#e6dfcf;--rouge:#b3261e;--ombre:0 1px 2px rgba(15,43,76,.06),0 8px 24px rgba(15,43,76,.08);--r:16px;color-scheme:light dark}
+@media (prefers-color-scheme:dark){:root{--ivoire:#0b1626;--carte:#12223a;--texte:#eef2f7;--texte-2:#a9b6c6;--trait:#22354f;--sarcelle:#4fd1c1;--nuit-2:#1d4673;--ombre:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.35)}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:var(--ivoire);color:var(--texte);font:400 1rem/1.6 system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",sans-serif}
+a{color:var(--sarcelle)}
+a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid var(--or);outline-offset:2px;border-radius:8px}
+.saut{position:absolute;left:-9999px}.saut:focus{left:12px;top:12px;z-index:9;background:var(--carte);padding:8px 12px;border-radius:8px}
+.entete{position:sticky;top:0;z-index:5;background:linear-gradient(180deg,#0f2b4c,#132f52);color:#fff;box-shadow:0 2px 12px rgba(0,0,0,.18)}
+.entete .l{max-width:1120px;margin:0 auto;display:flex;align-items:center;gap:12px;padding:10px 16px;min-height:60px}
+.marque{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;font-weight:800;letter-spacing:.08em}
+.marque img{border-radius:10px;box-shadow:0 0 0 1px rgba(255,255,255,.15)}
+.entete nav{margin-inline-start:auto;display:flex;gap:4px;align-items:center}
+.entete nav a{color:#fff;text-decoration:none;padding:10px 12px;border-radius:10px;font-weight:600;min-height:44px;display:inline-flex;align-items:center}
+.entete nav a[aria-current]{background:rgba(255,255,255,.12)}
+.entete nav a:hover{background:rgba(255,255,255,.08)}
+main{max-width:1120px;margin:0 auto;padding:0 16px 120px}
+.hero{padding:40px 0 20px;text-align:center}
+.hero h1{margin:0;font-size:clamp(1.9rem,5vw,2.8rem);line-height:1.15;color:var(--texte)}
+.hero p{margin:8px auto 0;color:var(--texte-2);max-width:52ch}
+.chercher{display:flex;justify-content:center;margin:20px 0 8px}
+.chercher input{width:min(560px,100%);min-height:48px;padding:0 16px;font:inherit;border-radius:999px;border:1px solid var(--trait);background:var(--carte);color:var(--texte);box-shadow:var(--ombre)}
+.grille{list-style:none;padding:0;margin:20px 0 0;display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
+.carte{display:flex;align-items:center;gap:14px;padding:14px 16px;background:var(--carte);border:1px solid var(--trait);border-radius:var(--r);text-decoration:none;color:var(--texte);box-shadow:var(--ombre);transition:transform .15s ease,border-color .15s ease;min-height:72px}
+.carte:hover{transform:translateY(-2px);border-color:var(--sarcelle)}
+.num{flex:none;width:42px;height:42px;display:grid;place-items:center;font-weight:700;font-size:.95rem;color:var(--nuit);background:linear-gradient(145deg,#fbe7b8,#e2a93b);border-radius:12px;transform:rotate(45deg)}
+.num span{transform:rotate(-45deg)}
+.carte .t{flex:1;min-width:0}
+.carte .t b{display:block;font-weight:700}
+.carte .t small{display:block;color:var(--texte-2);font-size:.85rem}
+.carte .ar{font-family:"Amiri Quran",serif;font-size:1.5rem;line-height:1.7;color:var(--texte);text-align:end;display:flex;flex-direction:column;align-items:flex-end}
+.carte .ar small{display:block;font-family:system-ui,sans-serif;font-size:.78rem;line-height:1.2;color:var(--texte-2)}
+.vide{text-align:center;color:var(--texte-2);padding:24px}
+.tete{margin:28px 0 8px;padding:28px 20px;text-align:center;border-radius:24px;color:#fff;background:radial-gradient(120% 140% at 50% 0%,#1d4673 0%,#0f2b4c 55%,#0b1f38 100%);box-shadow:0 12px 32px rgba(15,43,76,.25);position:relative;overflow:hidden}
+.tete::after{content:"";position:absolute;inset:auto -10% -60% -10%;height:80%;background:radial-gradient(closest-side,rgba(226,169,59,.25),transparent)}
+.tete .nomar{font-family:"Amiri Quran",serif;font-size:clamp(2.4rem,8vw,3.4rem);line-height:1.3;margin:0;color:var(--or-doux)}
+.tete h1{margin:10px 0 0;font-size:clamp(1.35rem,4vw,1.8rem);line-height:1.25}
+.tete p{margin:6px 0 0;color:#d6e0ec}
+.tete .pastilles{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:12px}
+.tete .pastilles span{border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:4px 12px;font-size:.85rem}
+.outils{display:flex;justify-content:center;margin:20px 0}
+.bascule{display:inline-flex;background:var(--carte);border:1px solid var(--trait);border-radius:999px;padding:4px;box-shadow:var(--ombre)}
+.bascule button{font:inherit;font-weight:600;border:0;background:none;color:var(--texte-2);min-height:44px;padding:0 18px;border-radius:999px;cursor:pointer}
+.bascule button[aria-pressed=true]{background:var(--nuit);color:#fff}
+.basmala{font-family:"Amiri Quran",serif;font-size:2rem;text-align:center;margin:8px 0 16px;color:var(--texte)}
+.versets{list-style:none;padding:0;margin:0}
+.v{padding:20px 4px;border-bottom:1px solid var(--trait);display:grid;grid-template-columns:auto 1fr;gap:4px 16px}
+.v .ref{grid-row:span 3;display:flex;flex-direction:column;align-items:center;gap:6px}
+.v .ref a{font-size:.85rem;font-weight:700;color:var(--sarcelle);text-decoration:none;min-height:44px;display:grid;place-items:center}
+.v .ref button{font:inherit;font-size:.8rem;border:1px solid var(--trait);background:var(--carte);color:var(--texte-2);border-radius:10px;min-height:44px;min-width:44px;padding:0 8px;cursor:pointer}
+.v .ar{font-family:"Amiri Quran",serif;font-size:clamp(1.65rem,4.4vw,2.1rem);line-height:2.25;text-align:right;direction:rtl;margin:0}
+.v .tr{margin:8px 0 0;color:var(--texte);font-size:1.02rem}
+.v details{margin-top:6px;color:var(--texte-2);font-size:.9rem}
+.v summary{cursor:pointer;min-height:44px;display:inline-flex;align-items:center}
+.lecture .versets{display:block;direction:rtl;text-align:justify;font-family:"Amiri Quran",serif;font-size:clamp(1.65rem,4.4vw,2.1rem);line-height:2.3;padding:8px 4px}
+.lecture .v{display:inline;padding:0;border:0}
+.lecture .v .ref,.lecture .v .tr,.lecture .v details{display:none}
+.lecture .v .ar{display:inline;font-size:inherit}
+.lecture .v .fin{display:inline}
+.fin{display:none;font-family:"Amiri Quran",serif;color:var(--sarcelle);margin:0 .2em}
+.sajda{color:var(--sarcelle);font-size:.85rem;font-weight:600}
+.navs{display:flex;justify-content:space-between;gap:12px;margin:28px 0;flex-wrap:wrap}
+.navs a{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 18px;border-radius:999px;border:1px solid var(--trait);background:var(--carte);color:var(--texte);text-decoration:none;font-weight:600;box-shadow:var(--ombre)}
+.app{position:fixed;inset:auto 0 0 0;z-index:6;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:color-mix(in srgb,var(--carte) 92%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--trait)}
+.app .l{max-width:1120px;margin:0 auto;display:flex;align-items:center;gap:12px}
+.app img{border-radius:10px}
+.app p{margin:0;flex:1;min-width:0;font-size:.88rem;color:var(--texte-2);line-height:1.3}
+.app p b{display:block;color:var(--texte);font-size:.95rem}
+.app a.bouton{flex:none;display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 18px;border-radius:999px;background:linear-gradient(180deg,#1d4673,#0f2b4c);color:#fff;text-decoration:none;font-weight:700;box-shadow:0 6px 16px rgba(15,43,76,.3)}
+.pied{border-top:1px solid var(--trait);margin-top:40px;padding:24px 16px 140px;color:var(--texte-2);font-size:.88rem}
+.pied .l{max-width:1120px;margin:0 auto}
+.pied h2{font-size:1rem;color:var(--texte);margin:0 0 8px}
+.pied p{margin:4px 0}
+.pied nav{display:flex;gap:16px;flex-wrap:wrap;margin-top:12px}
+.pied nav a{min-height:44px;display:inline-flex;align-items:center}
+@media (max-width:640px){.app p{display:none}.app a.bouton{flex:1;justify-content:center}.entete nav a{padding:10px}.v{grid-template-columns:1fr}.v .ref{grid-row:auto;flex-direction:row;justify-content:space-between}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
