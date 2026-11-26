@@ -40,7 +40,9 @@ main{max-width:1120px;margin:0 auto;padding:0 16px 120px}
 .tete p{margin:6px 0 0;color:#d6e0ec}
 .tete .pastilles{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:12px}
 .tete .pastilles span{border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:4px 12px;font-size:.85rem}
-.outils{display:flex;justify-content:center;margin:20px 0}
+.outils{display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap;margin:20px 0}
+.choix select{font:inherit;font-weight:600;min-height:48px;padding:0 14px;border-radius:999px;border:1px solid var(--trait);background:var(--carte);color:var(--texte);box-shadow:var(--ombre);max-width:220px}
+.intro{max-width:70ch;margin:16px auto 0;text-align:center;color:var(--texte-2)}
 .bascule{display:inline-flex;background:var(--carte);border:1px solid var(--trait);border-radius:999px;padding:4px;box-shadow:var(--ombre)}
 .bascule button{font:inherit;font-weight:600;border:0;background:none;color:var(--texte-2);min-height:44px;padding:0 18px;border-radius:999px;cursor:pointer}
 .bascule button[aria-pressed=true]{background:var(--nuit);color:#fff}

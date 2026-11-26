@@ -30,9 +30,13 @@ const ld = [
     <p class="nomar" lang="ar" dir="rtl">{s.ar}</p>
     <h1>{n}. {t.sourate} {s.latin}</h1>
     <p>{nomLocal}</p>
-    <div class="pastilles"><span>{t.type[s.type]}</span><span>{t.versets(s.versets)}</span></div>
+    <div class="pastilles"><span>{t.type[s.type]}</span><span>{t.versets(s.versets)}</span><span>{t.revelation(s.ordre)}</span></div>
   </section>
+  <p class="intro">{t.intro(s, aTrad)}</p>
   <div class="outils">
+    <label class="choix"><span class="saut">{t.allerSourate}</span><select id="aller" aria-label={t.allerSourate}>
+      {INDEX.map((x) => <option value={chemin(lang, x.n, x.slug)} selected={x.n === n}>{x.n}. {x.latin}</option>)}
+    </select></label>
     <div class="bascule" role="group" aria-label={`${t.modeVerset} / ${t.modeLecture}`}>
       <button type="button" data-mode="verset" aria-pressed="true">{t.modeVerset}</button>
       <button type="button" data-mode="lecture" aria-pressed="false">{t.modeLecture}</button>
@@ -46,6 +50,7 @@ const ld = [
           <div class="ref">
             <a href={`#v${v.a}`} aria-label={`${t.sourate} ${s.latin}, ${v.a}`}>{n}:{v.a}</a>
             <button type="button" data-copier={v.a} aria-label={`${t.copier} ${n}:${v.a}`}>{t.copier}</button>
+            <button type="button" data-partager={v.a} aria-label={`${t.partager} ${n}:${v.a}`} hidden>{t.partager}</button>
           </div>
           <p class="ar" lang="ar" dir="rtl">{arVerset(v)}<span class="fin" aria-hidden="true">﴿{chiffresAr(v.a)}﴾</span></p>
           {v.sajda && <p class="sajda">۩ {t.sajda}</p>}
@@ -65,7 +70,10 @@ const ld = [
   (function(){var tx=document.getElementById("texte"),bs=document.querySelectorAll("[data-mode]");
   function m(x){tx.classList.toggle("lecture",x==="lecture");bs.forEach(function(b){b.setAttribute("aria-pressed",b.dataset.mode===x)});try{localStorage.setItem("issra-mode",x)}catch(e){}}
   bs.forEach(function(b){b.addEventListener("click",function(){m(b.dataset.mode)})});try{if(localStorage.getItem("issra-mode")==="lecture")m("lecture")}catch(e){}
-  document.addEventListener("click",function(e){var b=e.target.closest("[data-copier]");if(!b||!navigator.clipboard)return;var li=b.closest("li"),a=li.querySelector(".ar").firstChild.textContent,tr=li.querySelector(".tr");
+  var al=document.getElementById("aller");al.addEventListener("change",function(){location.href=al.value});
+  if(navigator.share)document.querySelectorAll("[data-partager]").forEach(function(b){b.hidden=false});
+  document.addEventListener("click",function(e){var p=e.target.closest("[data-partager]");if(p){navigator.share({title:ref+" "+p.dataset.partager,url:location.origin+location.pathname+"#v"+p.dataset.partager}).catch(function(){});return}
+  var b=e.target.closest("[data-copier]");if(!b||!navigator.clipboard)return;var li=b.closest("li"),a=li.querySelector(".ar").firstChild.textContent,tr=li.querySelector(".tr");
   navigator.clipboard.writeText(a+(tr?"\n"+tr.textContent:"")+"\n("+ref+" "+b.dataset.copier+")\n"+location.origin+location.pathname+"#v"+b.dataset.copier).then(function(){b.textContent=copie;setTimeout(function(){b.textContent=copier},1500)})})})();
   </script>
 </Base>
