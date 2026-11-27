@@ -1,0 +1,34 @@
+---
+import Base from "../layouts/Base.astro";
+import { T, chemin } from "../i18n.mjs";
+import { INDEX } from "../donnees.mjs";
+const { lang } = Astro.props;
+const t = T[lang];
+const alternates = [{ lang: "fr", href: chemin("fr") }, { lang: "en", href: chemin("en") }, { lang: "x-default", href: chemin("en") }];
+const ld = [{ "@context": "https://schema.org", "@type": "CollectionPage", name: t.h1Index, description: t.descIndex, inLanguage: lang, isPartOf: { "@type": "WebSite", name: "ISSRA", url: new URL(chemin(lang), "https://ihyinspiration.net").href },
+  mainEntity: { "@type": "ItemList", numberOfItems: 114, itemListElement: INDEX.map((s) => ({ "@type": "ListItem", position: s.n, url: new URL(chemin(lang, s.n, s.slug), "https://ihyinspiration.net").href, name: `${t.sourate} ${s.latin}` })) } }];
+---
+<Base lang={lang} titre={t.titreIndex} description={t.descIndex} alternates={alternates} jsonld={ld}>
+  <section class="hero">
+    <h1>{t.h1Index}</h1>
+    <p>{t.sousIndex}</p>
+  </section>
+  <div class="chercher"><input id="q" type="search" inputmode="search" autocomplete="off" placeholder={t.rechercher} aria-label={t.rechercher} aria-controls="liste"></div>
+  <ul class="grille" id="liste">
+    {INDEX.map((s) => (
+      <li data-k={`${s.n} ${s.latin} ${s.fr} ${s.en} ${s.ar}`.toLowerCase()}>
+        <a class="carte" href={chemin(lang, s.n, s.slug)}>
+          <span class="num" aria-hidden="true"><span>{s.n}</span></span>
+          <span class="t"><b>{s.latin}</b><small>{lang === "fr" ? s.fr : s.en}</small></span>
+          <span class="ar" lang="ar">{s.ar}<small lang={lang}>{t.versets(s.versets)}</small></span>
+        </a>
+      </li>
+    ))}
+  </ul>
+  <p class="vide" id="vide" hidden role="status">{t.aucune}</p>
+  <script is:inline>
+  (function(){var q=document.getElementById("q"),li=document.querySelectorAll("#liste li"),v=document.getElementById("vide");
+  function n(x){return x.normalize("NFD").replace(/[\u0300-\u036f'\u2019\s-]/g,"").replace(/ee/g,"i").replace(/oo/g,"u").replace(/aa/g,"a")}
+  q.addEventListener("input",function(){var s=n(q.value.trim().toLowerCase()),k=0;li.forEach(function(e){var o=!s||n(e.dataset.k).indexOf(s)>=0;e.hidden=!o;if(o)k++});v.hidden=k>0})})();
+  </script>
+</Base>

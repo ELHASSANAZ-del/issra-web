@@ -1,0 +1,25 @@
+{
+  "releve": "2026-11-26T16:05Z",
+  "fichiers": {
+    "quran-uthmani.txt": {
+      "sha256": "bf4f57b968d03f4131c070b1e285da9be0e0a108a21c910e872801ca273312c8",
+      "url": "https://tanzil.net/pub/download/index.php?quranType=uthmani&outType=txt-2&agree=true",
+      "cite": { "nom": "Tanzil Quran Text (Uthmani)", "version": "1.1", "licence": "CC BY 3.0 (copie verbatim, modification interdite)", "lien": "https://tanzil.net" }
+    },
+    "quran-data.js": {
+      "sha256": "9e9930c592aaa34b5c7a79ff4e99ffdc782263a266090bfe2c49e4ed4bac4ca4",
+      "url": "https://tanzil.net/res/text/metadata/quran-data.js",
+      "cite": { "nom": "Tanzil Quran Metadata", "version": "1.0", "licence": "CC BY 3.0", "lien": "https://tanzil.net" }
+    },
+    "french_rashid.csv": {
+      "sha256": "1ac7ffc1711fa1fa4fc77bb690bd4d682bfd119b0f5d30724125e62196e0aff7",
+      "url": "https://quranenc.com/downloads/csv/french_rashid_v1.0.3-csv.1.csv",
+      "cite": { "nom": "Traduction française – Rachid Maach", "version": "1.0.3", "licence": "Conditions QuranEnc (texte non modifié, source et version citées)", "lien": "https://quranenc.com/fr/browse/french_rashid" }
+    },
+    "english_saheeh.csv": {
+      "sha256": "6029cb17db0365e93856f2fec15561db64f3609dba90e28c72358ce71cacbc5e",
+      "url": "https://quranenc.com/downloads/csv/english_saheeh_v1.1.2-csv.1.csv",
+      "cite": { "nom": "English Translation – Noor International Center", "version": "1.1.2", "licence": "QuranEnc terms (unmodified text, source and version cited)", "lien": "https://quranenc.com/en/browse/english_saheeh" }
+    }
+  }
+}

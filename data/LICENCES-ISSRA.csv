@@ -1,0 +1,6 @@
+fichier,cle,nom,licence,usage_commercial,statut,url_licence,date_verification,preuve
+quran-uthmani.txt,texte,Tanzil Quran Text (Uthmani) 1.1,CC BY 3.0 (copie verbatim; modification interdite; credit et lien tanzil.net),oui,autorise,https://tanzil.net/docs/text_license,2026-11-26,bloc de licence dans le fichier source (recopie dans chaque JSON)
+quran-data.js,meta,Tanzil Quran Metadata 1.0,CC BY 3.0,oui,autorise,https://tanzil.net/docs/quran_metadata,2026-11-26,en-tete du fichier source
+AmiriQuran.woff2,police,Amiri Quran,SIL OFL 1.1,oui,autorise,https://scripts.sil.org/OFL,2026-11-26,public/Amiri-OFL.txt
+french_rashid.csv,fr,Traduction francaise Rachid Maach 1.0.3 (QuranEnc),Conditions QuranEnc : republication sans modification; source et version citees; mise a jour; pas de publicite inappropriee,non precise,en_attente,https://quranenc.com/en/home/about,2026-11-26,usage commercial non mentionne : decision D202611261641241306-issra-web
+english_saheeh.csv,en,English Translation Noor International Center 1.1.2 (QuranEnc),Conditions QuranEnc : republication sans modification; source et version citees; mise a jour; pas de publicite inappropriee,non precise,en_attente,https://quranenc.com/en/home/about,2026-11-26,usage commercial non mentionne; version 1.1.3 publiee le 04/11/2026 a recuperer : decision D202611261641241306-issra-web

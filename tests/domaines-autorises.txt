@@ -1,0 +1,2 @@
+# Hotes autorises pour les requetes des pages ISSRA web (fiche §3) ; le serveur de test local est ajoute par le test.
+ihyinspiration.net

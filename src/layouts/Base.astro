@@ -1,0 +1,61 @@
+---
+import "../styles.css";
+import { T, STORE } from "../i18n.mjs";
+const { lang, titre, description, alternates = [], actif = "coran", jsonld = [], apercu = false } = Astro.props;
+const t = T[lang];
+const canon = new URL(Astro.url.pathname, Astro.site).href;
+---
+<!doctype html>
+<html lang={lang} dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{titre}</title>
+<meta name="description" content={description}>
+<link rel="canonical" href={canon}>
+{alternates.map((a) => <link rel="alternate" hreflang={a.lang} href={new URL(a.href, Astro.site).href}>)}
+{apercu && <meta name="robots" content="noindex">}
+<meta name="theme-color" content="#0A1A4A" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#071440" media="(prefers-color-scheme: dark)">
+<link rel="manifest" href={`/issra/manifest-${lang}.webmanifest`}>
+<link rel="icon" href="/issra/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/issra/apple-touch-icon.png">
+<link rel="preload" href="/issra/AmiriQuran.woff2" as="font" type="font/woff2" crossorigin>
+<meta property="og:type" content="website"><meta property="og:title" content={titre}><meta property="og:description" content={description}><meta property="og:url" content={canon}><meta property="og:image" content="https://ihyinspiration.net/issra/icone-512.png"><meta property="og:locale" content={lang === "fr" ? "fr_FR" : "en_US"}>
+{jsonld.map((j) => <script type="application/ld+json" set:html={JSON.stringify(j).replace(/</g, "\\u003c")} />)}
+</head>
+<body>
+<a class="saut" href="#contenu">{t.aller}</a>
+<header class="entete"><div class="l">
+  <a class="marque" href={`/issra/${lang}/${lang === "fr" ? "coran" : "quran"}/`}><img src="/issra/icone-96.png" width="36" height="36" alt="">ISSRA</a>
+  <nav aria-label={t.coran}>
+    <a href={`/issra/${lang}/${lang === "fr" ? "coran" : "quran"}/`} aria-current={actif === "coran" ? "page" : undefined}>{t.coran}</a>
+    <a class="l2" href={alternates.find((a) => a.lang !== lang && a.lang !== "x-default")?.href} hreflang={lang === "fr" ? "en" : "fr"} lang={lang === "fr" ? "en" : "fr"}>{lang === "fr" ? "English" : "Français"}</a>
+  </nav>
+</div></header>
+<main id="contenu"><slot /></main>
+<footer class="pied"><div class="l">
+  <h2>{t.piedSources}</h2>
+  <p>{t.piedTanzil} <a href="https://tanzil.net" rel="noopener">tanzil.net</a></p>
+  <slot name="sources" />
+  <p>{t.piedPolice}</p>
+  <p>{t.aucunTraceur} {t.horsLigne}</p>
+  <p>{t.piedEditeur}</p>
+  <nav aria-label={t.piedSources}>
+    <a href={`/${lang}/apps/iqra/`}>ISSRA</a>
+    <a href={`/${lang}/privacy/`}>{t.confidentialite}</a>
+    <a href={`/${lang}/terms/`}>{t.conditions}</a>
+    <a href="/">{t.accueilIhy}</a>
+  </nav>
+</div></footer>
+<aside class="app" aria-label="ISSRA"><div class="l">
+  <img src="/issra/icone-96.png" width="44" height="44" alt="">
+  <p><b>{t.ecouter}</b><small>{t.ecouterSous}</small></p>
+  <a class="bouton" data-store data-apple={STORE.apple} href={STORE.play}>{t.ecouterApp}</a>
+</div></aside>
+<script is:inline>
+(function(){var a=document.querySelector("[data-store]"),u=navigator.userAgent;if(a&&(/iPhone|iPad|iPod/.test(u)||/Macintosh/.test(u)&&"ontouchend"in document))a.href=a.dataset.apple;
+if("serviceWorker"in navigator){navigator.serviceWorker.register("/issra/sw.js",{scope:"/issra/"}).then(function(){if(window.caches)caches.open("issra-pages-1").then(function(c){c.add(location.pathname)})}).catch(function(){})}})();
+</script>
+</body>
+</html>
